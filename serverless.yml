@@ -13,7 +13,7 @@ provider:
   environment: 
     REGION: ap-southeast-1
     STAGE: local
-    BASE_URL: http://localhost:3000
+    BASE_URL: http://localhost:3000/local
 
 plugins:
   - serverless-dynamodb
@@ -40,18 +40,18 @@ functions:
       - http:
           path: list-urls
           method: get
+  redirect:
+    handler: handler.redirect
+    events:
+      - http:
+          path: s/{id}
+          method: get
   generate:
     handler: handler.generate
     events:
       - http:
           path: generate-url
-          method: post          
-  redirect:
-    handler: handler.redirect
-    events:
-      - http:
-        path: s/${id}
-        method: get
+          method: post
 
 resources:
   Resources:
