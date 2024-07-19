@@ -1,0 +1,16 @@
+{
+  "name": "sls_url_shortener",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "local": "sls offline start --reloadHandler --region ap-southeast-1 --stage local --httpPort 3000"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless-dynamodb-local": "^0.2.40",
+    "serverless-offline": "^13.6.0"
+  }
+}
