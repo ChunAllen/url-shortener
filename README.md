@@ -1,4 +1,4 @@
-[URL Shortener Serverless.postman_collection.json](https://github.com/user-attachments/files/16312131/URL.Shortener.Serverless.postman_collection.json)# URL Shortener Serverless
+# URL Shortener Serverless
 
 ## Stacks
 ```
