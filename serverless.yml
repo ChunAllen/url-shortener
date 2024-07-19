@@ -6,19 +6,32 @@ provider:
   name: aws
   runtime: nodejs20.x
   region: ap-southeast-1
+  apiGateway:
+    apiKeySourceType: HEADER
+  versionFunctions: false
+  timeout: 30
+  environment: 
+    REGION: ap-southeast-1
+    STAGE: local
+    BASE_URL: http://localhost:3000
 
 plugins:
-  - serverless-dynamodb-local
+  - serverless-dynamodb
   - serverless-offline
 
-custom:
-  dynamodb:
+custom: 
+  serverless-dynamodb:
     stages:
-      - dev
+      - local
     start:
       port: 8000
       inMemory: true
+      heapInitial: 200m
+      heapMax: 1g
       migrate: true
+      seed: true
+      convertEmptyValues: true
+  env: local
 
 functions:
   list:
@@ -32,7 +45,13 @@ functions:
     events:
       - http:
           path: generate-url
-          method: post
+          method: post          
+  redirect:
+    handler: handler.redirect
+    events:
+      - http:
+        path: s/${id}
+        method: get
 
 resources:
   Resources:

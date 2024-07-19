@@ -1,23 +1,34 @@
 'use strict';
 
-module.exports.list = async (event) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: 'Go Serverless v1.0! Your function executed successfully!',
-        input: event,
-      },
-      null,
-      2
-    ),
-  };
+const Url = require('./models/urls').Url
+const uuidv4 = require('uuid/v4')
+const helper = require('./helper')
 
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
+module.exports.list = async (event) => {
+  let urls = await Url.scan().exec()
+
+  console.log(urls)
 };
 
 
 module.exports.generate = async (event) => {
-  console.log(event)
+  const body = JSON.parse(event.body)
+
+  const originalUrl = body.original_url
+  const id = uuidv4()
+
+  const params = {
+    id: id,
+    original_url: originalUrl,
+    shortened_url: `${process.env.BASE_URL}/${process.env.STAGE}/s-link/${id}`,
+    createdAt: helper.timestamp(),
+    updatedAt: helper.timestamp()
+  }
+
+  console.log(params)
 }
+
+module.exports.redirect = async (event) => {
+
+}
+

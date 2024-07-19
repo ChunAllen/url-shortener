@@ -10,7 +10,18 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "serverless-dynamodb-local": "^0.2.40",
+    "serverless-dynamodb": "^0.2.54",
     "serverless-offline": "^13.6.0"
+  },
+  "dependencies": {
+    "dynamoose": "^4.0.1",
+    "moment": "^2.30.1",
+    "moment-timezone": "^0.5.45",
+    "uuid": "^3.3.2"
+  },
+  "overrides": {
+    "serverless-dynamodb-local": {
+      "dynamodb-localhost": "https://github.com/99x/dynamodb-localhost#db30898f8c40932c7177be7b2f1a81360d12876d"
+    }
   }
 }
